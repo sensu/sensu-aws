@@ -1,0 +1,102 @@
+builds:
+  # List of builds
+- # First Build
+  env:
+    - CGO_ENABLED=0
+  main: ./plugins/cloudwatch/check-cloudwatch-alarm/main.go
+  binary: bin/check-cloudwatch-alarm
+- binary: bin/check-s3-bucket
+  main: ./plugins/s3/check-s3-bucket/main.go
+- binary: bin/check-s3-bucket-visibility
+  main: ./plugins/s3/check-s3-bucket-visibility/main.go
+- binary: bin/check-s3-object
+  main: ./plugins/s3/check-s3-object/main.go
+- binary: bin/check-s3-tag
+  main: ./plugins/s3/check-s3-tag/main.go
+- binary: bin/metrics-s3
+  main: ./plugins/s3/metrics-s3/main.go
+- binary: bin/check-rds
+  main: ./plugins/rds/check-rds/main.go
+- binary: bin/check-rds-events
+  main: ./plugins/rds/check-rds-events/main.go
+- binary: bin/check-rds-pending
+  main: ./plugins/rds/check-rds-pending/main.go
+- binary: bin/metrics-rds
+  main: ./plugins/rds/metrics-rds/main.go
+- binary: bin/check-elb-certs
+  main: ./plugins/elb/check-elb-certs/main.go
+- binary: bin/check-elb-health-fog
+  main: ./plugins/elb/check-elb-health-fog/main.go
+- binary: bin/check-elb-health-sdk
+  main: ./plugins/elb/check-elb-health-sdk/main.go
+- binary: bin/check-elb-instances-inservice
+  main: ./plugins/elb/check-elb-instances-inservice/main.go
+- binary: bin/check-elb-latency
+  main: ./plugins/elb/check-elb-latency/main.go
+- binary: bin/check-elb-nodes
+  main: ./plugins/elb/check-elb-nodes/main.go
+- binary: bin/check-elb-sum-requests
+  main: ./plugins/elb/check-elb-sum-requests/main.go
+- binary: bin/metrics-elb
+  main: ./plugins/elb/metrics-elb/main.go
+- binary: bin/check-ec2-cpu_balance
+  main: ./plugins/ec2/check-ec2-cpu_balance/main.go
+- binary: bin/check-ec2-filter
+  main: ./plugins/ec2/check-ec2-filter/main.go
+- binary: bin/check-ec2-netwrok
+  main: ./plugins/ec2/check-ec2-network/main.go
+- binary: bin/metrics-ec2-count
+  main: ./plugins/ec2/metrics-ec2-count/main.go
+- binary: bin/metrics-ec2-filter
+  main: ./plugins/ec2/metrics-ec2-filter/main.go
+- binary: bin/check-ebs-burst-limit
+  main: ./plugins/ebs/check-ebs-burst-limit/main.go
+- binary: bin/check-ebs-snapshots
+  main: ./plugins/ebs/check-ebs-snapshots/main.go
+- binary: bin/check-cloudwatch-alarms
+  main: ./plugins/cloudwatch/check-cloudwatch-alarms/main.go
+- binary: bin/check-cloudwatch-composite-metric
+  main: ./plugins/cloudwatch/check-cloudwatch-composite-metric/main.go
+- binary: bin/check-alb-target-group-health
+  main: ./plugins/alb/check-alb-target-group-health/main.go
+
+  goos:
+    - darwin
+    - freebsd
+    - linux
+    - netbsd
+    - solaris
+    - windows
+  goarch:
+    - amd64
+    - 386
+    - arm
+    - arm64
+  goarm:
+    - 5
+    - 6
+    - 7
+  ignore:
+      # TODO: add freebsd/arm support to gopsutil
+    - goos: freebsd
+      goarch: arm
+
+checksum:
+  # You can change the name of the checksums file.
+  # Default is `{{ .ProjectName }}_{{ .Version }}_checksums.txt`.
+  name_template: "{{ .ProjectName }}_{{ .Version }}_sha256-checksums.txt"
+
+archive:
+  format: tar.gz
+  files:
+    - LICENSE
+    - README.md
+    - CHANGELOG.md
+  # You can change the name of the GitHub release.
+  # This is parsed with the Go template engine and the following variables
+  # are available:
+  # - ProjectName
+  # - Tag
+  # - Version (Git tag without `v` prefix)
+  # Default is ``
+  #name_template: "{{.ProjectName}}-v{{.Version}}"
