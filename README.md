@@ -1,5 +1,7 @@
 # aws-plugins
-![https://travis-ci.org/sensu/sensu-pagerduty-handler](https://travis-ci.org/sreejita-biswas/aws-handler.svg?branch=develop "TravisCI")
+
+TravisCI: [![TravisCI Build Status](https://travis-ci.org/sreejita-biswas/aws-handler.svg?branch=develop)](https://github.com/sreejita-biswas/aws-handler)
+
 ## Functionality
 
 **check-ec2-cpu_balance**
