@@ -10,7 +10,7 @@ install:
 - dep ensure
 script:
 - gometalinter.v1 --vendor --disable-all --enable=vet --enable=ineffassign
-  --enable=goconst --tests ./...
+  --enable=goconst #--tests ./...
 
 before_script: 
 - echo "REPO $TRAVIS_REPO_SLUG TAG ${TRAVIS_TAG}"
