@@ -7,7 +7,7 @@ import (
 	"time"
 
 	"github.com/spf13/cobra"
-	"github.com/sreejita-biswas/aws-plugins/awsclient"
+	"github.com/sreejita-biswas/aws-handler/awsclient"
 
 	"github.com/aws/aws-sdk-go/aws"
 
@@ -15,7 +15,7 @@ import (
 	"github.com/aws/aws-sdk-go/service/cloudwatch"
 	"github.com/aws/aws-sdk-go/service/ec2"
 	"github.com/aws/aws-sdk-go/service/elb"
-	"github.com/sreejita-biswas/aws-plugins/aws_session"
+	"github.com/sreejita-biswas/aws-handler/aws_session"
 )
 
 /*

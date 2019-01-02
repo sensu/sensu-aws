@@ -12,9 +12,9 @@ import (
 
 	"github.com/aws/aws-sdk-go/service/elbv2"
 
-	"github.com/sreejita-biswas/aws-plugins/awsclient"
+	"github.com/sreejita-biswas/aws-handler/awsclient"
 
-	"github.com/sreejita-biswas/aws-plugins/aws_session"
+	"github.com/sreejita-biswas/aws-handler/aws_session"
 
 	"github.com/aws/aws-sdk-go/aws/session"
 )
