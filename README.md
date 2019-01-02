@@ -1,5 +1,5 @@
 # aws-plugins
-
+https://travis-ci.org/sreejita-biswas/aws-handler.svg?branch=develop
 ## Functionality
 
 **check-ec2-cpu_balance**
