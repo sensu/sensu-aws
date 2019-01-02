@@ -1,6 +1,6 @@
 # aws-plugins
 
-TravisCI: [![TravisCI Build Status](https://travis-ci.org/sreejita-biswas/aws-handler.svg?branch=develop)](https://github.com/sreejita-biswas/aws-handler)
+TravisCI: [![TravisCI Build Status](https://travis-ci.org/sreejita-biswas/aws-handler.svg?branch=develop)](https://travis-ci.org/sreejita-biswas/aws-handler)
 
 ## Functionality
 
