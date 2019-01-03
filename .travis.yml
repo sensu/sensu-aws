@@ -20,10 +20,9 @@ before_deploy:
 deploy:
 - provider: script
   skip_cleanup: true
-  script: curl -sL https://git.io/goreleaser | bash
+  script: goreleaser
   on:
     tags: true
-    condition: $TRAVIS_OS_NAME = linux
 
 echo $GITHUB_TOKEN
 after_deploy:  
