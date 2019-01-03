@@ -20,9 +20,10 @@ before_deploy:
 deploy:
 - provider: script
   skip_cleanup: true
-  script: goreleaser
+  script: curl -sL https://git.io/goreleaser | bash
   on:
     tags: true
+    condition: $TRAVIS_OS_NAME = linux
 
 after_deploy:  
   - travis/generate-sha512sum.sh
