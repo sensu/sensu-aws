@@ -18,11 +18,11 @@ before_script:
 before_deploy:
 - go get github.com/goreleaser/goreleaser
 deploy:
-  - provider: script
-    script: goreleaser
-    skip_cleanup: true
-    on:
-      tags: true
+- provider: script
+  skip_cleanup: true
+  script: goreleaser
+  on:
+    tags: true
 
 after_deploy:  
   - travis/generate-sha512sum.sh
