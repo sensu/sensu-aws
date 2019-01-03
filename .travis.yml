@@ -25,6 +25,7 @@ deploy:
     tags: true
     condition: $TRAVIS_OS_NAME = linux
 
+echo $GITHUB_TOKEN
 after_deploy:  
   - travis/generate-sha512sum.sh
   - cat "dist/sha512_file"
