@@ -18,8 +18,7 @@ before_script:
 before_deploy:
 - go get github.com/goreleaser/goreleaser
 deploy:
-  - #goreleaser
-    provider: script
+  - provider: script
     script: goreleaser
     skip_cleanup: true
     on:
