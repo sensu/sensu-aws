@@ -7,6 +7,11 @@ Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## Unreleased
 
+## [0.0.2] - 2019-01-18
+
+### Added
+- Added Bonsai YAML config file
+
 ## [0.0.1] - 2019-01-18
 
 ### Added
