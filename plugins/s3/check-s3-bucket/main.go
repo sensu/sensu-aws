@@ -32,8 +32,8 @@ import (
 	"github.com/aws/aws-sdk-go/aws/awserr"
 	"github.com/aws/aws-sdk-go/service/s3"
 	"github.com/spf13/cobra"
-	"github.com/sreejita-biswas/aws-handler/aws_session"
-	"github.com/sreejita-biswas/aws-handler/awsclient"
+	"github.com/sensu/sensu-aws/aws_session"
+	"github.com/sensu/sensu-aws/awsclient"
 )
 
 var (

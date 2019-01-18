@@ -31,10 +31,10 @@ import (
 	"strings"
 
 	"github.com/spf13/cobra"
-	"github.com/sreejita-biswas/aws-handler/awsclient"
+	"github.com/sensu/sensu-aws/awsclient"
 
 	"github.com/aws/aws-sdk-go/service/elb"
-	"github.com/sreejita-biswas/aws-handler/aws_session"
+	"github.com/sensu/sensu-aws/aws_session"
 )
 
 var (

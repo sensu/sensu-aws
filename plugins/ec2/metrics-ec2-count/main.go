@@ -30,12 +30,12 @@ import (
 	"os"
 
 	"github.com/spf13/cobra"
-	"github.com/sreejita-biswas/aws-handler/awsclient"
+	"github.com/sensu/sensu-aws/awsclient"
 
 	"github.com/aws/aws-sdk-go/service/cloudwatch"
 	"github.com/aws/aws-sdk-go/service/ec2"
-	"github.com/sreejita-biswas/aws-handler/aws_session"
-	"github.com/sreejita-biswas/aws-handler/utils"
+	"github.com/sensu/sensu-aws/aws_session"
+	"github.com/sensu/sensu-aws/utils"
 )
 
 var (

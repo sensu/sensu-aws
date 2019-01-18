@@ -44,12 +44,12 @@ import (
 	"time"
 
 	"github.com/spf13/cobra"
-	"github.com/sreejita-biswas/aws-handler/awsclient"
+	"github.com/sensu/sensu-aws/awsclient"
 
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/service/ec2"
 	"github.com/aws/aws-sdk-go/service/rds"
-	"github.com/sreejita-biswas/aws-handler/aws_session"
+	"github.com/sensu/sensu-aws/aws_session"
 )
 
 var (
