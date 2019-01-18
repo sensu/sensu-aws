@@ -46,6 +46,12 @@ import (
 #   TODO
 */
 
+const (
+	SumString = "Sum"
+	AvgString = "Average"
+	MaxString = "Maximum"
+)
+
 var (
 	awsRegion    string
 	elbName      string
@@ -141,9 +147,9 @@ func printStatistic(elb string, metricName string, statistic string) {
 				minimumTimeDifference = timeDifference
 				if statistic == "Average" {
 					value = datapoint.Average
-				} else if statistic == "Sum" {
+				} else if statistic == SumString {
 					value = datapoint.Sum
-				} else if statistic == "Maximum" {
+				} else if statistic == MaxString {
 					value = datapoint.Maximum
 				}
 				timestamp = *datapoint.Timestamp
@@ -151,9 +157,9 @@ func printStatistic(elb string, metricName string, statistic string) {
 				minimumTimeDifference = timeDifference
 				if statistic == "Average" {
 					value = datapoint.Average
-				} else if statistic == "Sum" {
+				} else if statistic == SumString {
 					value = datapoint.Sum
-				} else if statistic == "Maximum" {
+				} else if statistic == MaxString {
 					value = datapoint.Maximum
 				}
 				timestamp = *datapoint.Timestamp
@@ -165,19 +171,19 @@ func printStatistic(elb string, metricName string, statistic string) {
 
 func getMetricStatisticMapping(metricName string) string {
 	metricStatisticMapping := make(map[string]string)
-	metricStatisticMapping["Latency"] = "Average"
-	metricStatisticMapping["RequestCount"] = "Sum"
-	metricStatisticMapping["UnHealthyHostCount"] = "Average"
-	metricStatisticMapping["HealthyHostCount"] = "Average"
-	metricStatisticMapping["HTTPCode_Backend_2XX"] = "Sum"
-	metricStatisticMapping["HTTPCode_Backend_3XX"] = "Sum"
-	metricStatisticMapping["HTTPCode_Backend_4XX"] = "Sum"
-	metricStatisticMapping["HTTPCode_Backend_5XX"] = "Sum"
-	metricStatisticMapping["HTTPCode_ELB_4XX"] = "Sum"
-	metricStatisticMapping["HTTPCode_ELB_5XX"] = "Sum"
-	metricStatisticMapping["BackendConnectionErrors"] = "Sum"
-	metricStatisticMapping["SurgeQueueLength"] = "Maximum"
-	metricStatisticMapping["SpilloverCount"] = "Sum"
+	metricStatisticMapping["Latency"] = AvgString
+	metricStatisticMapping["RequestCount"] = SumString
+	metricStatisticMapping["UnHealthyHostCount"] = AvgString
+	metricStatisticMapping["HealthyHostCount"] = AvgString
+	metricStatisticMapping["HTTPCode_Backend_2XX"] = SumString
+	metricStatisticMapping["HTTPCode_Backend_3XX"] = SumString
+	metricStatisticMapping["HTTPCode_Backend_4XX"] = SumString
+	metricStatisticMapping["HTTPCode_Backend_5XX"] = SumString
+	metricStatisticMapping["HTTPCode_ELB_4XX"] = SumString
+	metricStatisticMapping["HTTPCode_ELB_5XX"] = SumString
+	metricStatisticMapping["BackendConnectionErrors"] = SumString
+	metricStatisticMapping["SurgeQueueLength"] = MaxString
+	metricStatisticMapping["SpilloverCount"] = SumString
 	return metricStatisticMapping[metricName]
 }
 

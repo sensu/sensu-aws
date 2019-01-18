@@ -132,10 +132,10 @@ func getMetric(volumeId string) (bool, bool, []string) {
 			}
 		}
 		if *averageValue < criticalThreshold {
-			errors = append(errors, fmt.Sprintf("%s:%s", volumeId, averageValue))
+			errors = append(errors, fmt.Sprintf("%v:%v", volumeId, averageValue))
 			isCRitical = true
 		} else if *averageValue < warningThreshold {
-			errors = append(errors, fmt.Sprintf("%s:%s", volumeId, averageValue))
+			errors = append(errors, fmt.Sprintf("%v:%v", volumeId, averageValue))
 			shouldWarn = true
 		}
 	}

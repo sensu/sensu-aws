@@ -139,7 +139,6 @@ func checkRds() {
 		return
 	}
 	for instance, zone := range dbInstanceZoneMapping {
-		values = make(map[string]*float64)
 		//if zone != availabilityZone {
 		// if availabilityZoneSeverity == "citical" {
 		// 	fmt.Print("CRITICAL :")

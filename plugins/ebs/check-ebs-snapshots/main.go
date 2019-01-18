@@ -84,7 +84,6 @@ func checkSnapshot() {
 		for _, volume := range volumes.Volumes {
 			tags := volume.Tags
 			ignoreVolume := false
-			tagNames = []string{}
 			if volume.Tags != nil && len(volume.Tags) > 0 {
 				for _, tag := range tags {
 					if checkIgnored && *tag.Key == "IGNORE_BACKUP" {

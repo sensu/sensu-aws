@@ -49,7 +49,7 @@ var (
 func checkAlarms() {
 	selectedAlarms := []string{}
 	excludeAlarmsMap := make(map[string]*string)
-	discardedAlarms := []string{}
+
 	var success bool
 
 	awsSession := aws_session.CreateAwsSessionWithRegion(awsRegion)
@@ -73,7 +73,7 @@ func checkAlarms() {
 	}
 
 	if len(excludeAlarms) > 0 {
-		discardedAlarms = strings.Split(excludeAlarms, ",")
+		discardedAlarms := strings.Split(excludeAlarms, ",")
 		for _, alarm := range discardedAlarms {
 			excludeAlarmsMap[alarm] = &alarm
 		}

@@ -71,7 +71,7 @@ func checkSum() {
 	if !success {
 		return
 	}
-	success, cloudWatchClient = awsclient.GetCloudWatchClient(awsSession)
+	_, cloudWatchClient = awsclient.GetCloudWatchClient(awsSession)
 	for _, elb := range elbs {
 		value, startTime, endTime, err := getMetrics(elb)
 		if err != nil {
