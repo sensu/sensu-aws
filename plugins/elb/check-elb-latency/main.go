@@ -6,8 +6,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/spf13/cobra"
 	"github.com/sensu/sensu-aws/awsclient"
+	"github.com/spf13/cobra"
 
 	"github.com/aws/aws-sdk-go/aws"
 
@@ -38,7 +38,7 @@ import (
 #   ./check-elb-latency --warning_over=1 --critical_over=3
 #
 #   Critical if "app" load balancer's latency is over 5 seconds, maximum of last one hour
-#   ./check-elb-latency --elb_names=app --critical_over 5 --statistics=maximum --period=3600
+#   ./check-elb-latency --elb_names=app --critical_over=5 --statistics=maximum --period=3600
 #
 # NOTES:
 #

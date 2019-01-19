@@ -2,7 +2,7 @@ package main
 
 /*
 #
-# check-ec2-filter
+# metrics-ec2-filter
 #
 # DESCRIPTION:
 #   This plugin retrieves EC2 instances matching a given filter and
@@ -32,11 +32,11 @@ import (
 	"strings"
 
 	"github.com/aws/aws-sdk-go/service/ec2"
-	"github.com/spf13/cobra"
 	"github.com/sensu/sensu-aws/aws_session"
 	"github.com/sensu/sensu-aws/awsclient"
 	"github.com/sensu/sensu-aws/models"
 	"github.com/sensu/sensu-aws/utils"
+	"github.com/spf13/cobra"
 )
 
 var (

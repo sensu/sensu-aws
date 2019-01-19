@@ -6,8 +6,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/spf13/cobra"
 	"github.com/sensu/sensu-aws/awsclient"
+	"github.com/spf13/cobra"
 
 	"github.com/aws/aws-sdk-go/aws"
 
@@ -20,7 +20,7 @@ import (
 
 /*
 #
-# chwck-elb-sum-requests
+# check-elb-sum-requests
 #
 # DESCRIPTION:
 #   Check ELB Sum Requests by CloudWatch API.
