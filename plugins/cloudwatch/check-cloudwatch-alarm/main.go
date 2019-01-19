@@ -14,7 +14,7 @@ import (
 
 /*
 #
-# check-cloudwatch-alarms
+# check-cloudwatch-alarm
 #
 # DESCRIPTION:
 #   This plugin raise a critical if one of cloud watch alarms are in given state.
