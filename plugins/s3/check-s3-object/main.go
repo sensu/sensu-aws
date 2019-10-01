@@ -88,7 +88,7 @@ func checkObject() {
 			age = time.Since(*output.LastModified)
 			size = *output.ContentLength
 			keyFullName = keyName
-			printMesaage(age, keyFullName, size)
+			printMessage(age, keyFullName, size)
 		}
 	} else if len(strings.TrimSpace(keyPrefix)) > 0 {
 		input := &s3.ListObjectsInput{Bucket: aws.String(bucketName), Prefix: aws.String(keyPrefix)}
@@ -113,17 +113,17 @@ func checkObject() {
 		keyFullName = *output.Contents[0].Key
 		age = time.Since(*output.Contents[0].LastModified)
 		size = *output.Contents[0].Size
-		printMesaage(age, keyFullName, size)
+		printMessage(age, keyFullName, size)
 	}
 }
 
 func checkAge(age time.Duration, keyName string) {
 	if age.Seconds() > criticalAge {
-		fmt.Println(fmt.Sprintf("CRITICAL : S3 Object '%s' size : '%d' octets (Bucket - '%s')", keyName, age, bucketName))
+		fmt.Println(fmt.Sprintf("CRITICAL : S3 Object '%s' age : '%d' octets (Bucket - '%s')", keyName, int(age.Seconds()), bucketName))
 		return
 	}
 	if age.Seconds() > warningAge {
-		fmt.Println(fmt.Sprintf("WARNING : S3 Object '%s' size : '%d' octets (Bucket - '%s')", keyName, age, bucketName))
+		fmt.Println(fmt.Sprintf("WARNING : S3 Object '%s' age : '%d' octets (Bucket - '%s')", keyName, int(age.Seconds()), bucketName))
 		return
 	}
 	fmt.Println(fmt.Sprintf("OK : S3 Object '%s' exists in bucket '%s'", keyName, bucketName))
@@ -175,7 +175,7 @@ func printErroMessage(err error, keyFullName string) {
 	}
 }
 
-func printMesaage(age time.Duration, keyFullName string, size int64) {
+func printMessage(age time.Duration, keyFullName string, size int64) {
 	checkAge(age, keyFullName)
 	if size != 0 {
 		checkSize(size, keyFullName)
@@ -248,7 +248,7 @@ func configureRootCommand() *cobra.Command {
 	cmd.Flags().BoolVarP(&noCritOnMultipleObjects,
 		"no_crit_on_multiple_objects",
 		"",
-		true,
+		false,
 		"If this flag is set, sort all matching objects by last_modified date and check against the newest. By default, this check will return a CRITICAL result if multiple matching objects are found.")
 	_ = cmd.MarkFlagRequired("bucket_name")
 	return cmd

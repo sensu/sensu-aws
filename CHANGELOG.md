@@ -7,6 +7,10 @@ Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## Unreleased
 
+### Changed
+- [check-s3-object] Fix `no_crit_on_multiple_objects` flag checks against the newest match
+- [check-s3-object] `no_crit_on_multiple_objects` flag default to false
+
 ## [0.0.2] - 2019-01-18
 
 ### Added
