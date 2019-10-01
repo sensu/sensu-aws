@@ -10,7 +10,7 @@ func SortContents(contents []*s3.Object) {
 	for !sorted {
 		swapped := false
 		for i := 0; i < n-1; i++ {
-			if (*contents[i].LastModified).After(*contents[i+1].LastModified) {
+			if (*contents[i].LastModified).Before(*contents[i+1].LastModified) {
 				contents[i+1], contents[i] = contents[i], contents[i+1]
 				swapped = true
 			}
