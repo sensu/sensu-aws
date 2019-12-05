@@ -16,7 +16,7 @@ before_script:
 - echo "REPO $TRAVIS_REPO_SLUG TAG ${TRAVIS_TAG}"
 
 before_deploy:
-- go get github.com/goreleaser/goreleaser
+- go get github.com/goreleaser/goreleaser@v0.123.2
 
 deploy:
   - #goreleaser
