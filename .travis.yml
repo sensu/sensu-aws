@@ -1,6 +1,6 @@
 language: go
 go:
-- 1.12.x
+- 1.10.x
 install:
 - go get gopkg.in/alecthomas/gometalinter.v1
 - go get github.com/gordonklaus/ineffassign
@@ -15,13 +15,10 @@ script:
 before_script:
 - echo "REPO $TRAVIS_REPO_SLUG TAG ${TRAVIS_TAG}"
 
-before_deploy:
-- go get github.com/goreleaser/goreleaser@v0.123.2
-
 deploy:
   - #goreleaser
     provider: script
-    script: goreleaser
+    script: VERSION=0.123.2 curl -sL https://git.io/goreleaser | bash
     skip_cleanup: true
     on:
       tags: true
