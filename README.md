@@ -1,6 +1,6 @@
 # aws-plugins
 
-TravisCI: [![TravisCI Build Status](https://travis-ci.org/sreejita-biswas/aws-handler.svg?branch=develop)](https://travis-ci.org/sreejita-biswas/aws-handler)
+TravisCI: [![Build Status](https://travis-ci.org/sensu/sensu-aws.svg?branch=master)](https://travis-ci.org/sensu/sensu-aws)
 
 ## Functionality
 - check-alb-target-group-health
