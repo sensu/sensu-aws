@@ -93,7 +93,7 @@ func getUnhealthyTargetGroupCount(targetGroups []*elbv2.TargetGroup) {
 		healthInput.TargetGroupArn = targetGroup.TargetGroupArn
 		healthOutput, err := elbV2lient.DescribeTargetHealth(healthInput)
 		if err != nil {
-			fmt.Println("Error while calling DescribeTargetHealth AWS API,", err.(awserr.Error).Message)
+			fmt.Println("Error while calling DescribeTargetHealth AWS API,", err.(awserr.Error).Message())
 			return
 		}
 		if !(healthOutput != nil && healthOutput.TargetHealthDescriptions != nil && len(healthOutput.TargetHealthDescriptions) > 0) {
