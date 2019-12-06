@@ -1,64 +1,91 @@
+env:
+  - CGO_ENABLED=0
+  - GO111MODULE=on
 builds:
-  # List of builds
-- # First Build
-  env:
-    - CGO_ENABLED=0
+- binary: bin/check-cloudwatch-alarm
   main: ./plugins/cloudwatch/check-cloudwatch-alarm/main.go
-  binary: bin/check-cloudwatch-alarm
+  id: check-cloudwatch-alarm
 - binary: bin/check-s3-bucket
   main: ./plugins/s3/check-s3-bucket/main.go
+  id: check-s3-bucket
 - binary: bin/check-s3-bucket-visibility
   main: ./plugins/s3/check-s3-bucket-visibility/main.go
+  id: check-s3-bucket-visibility
 - binary: bin/check-s3-object
   main: ./plugins/s3/check-s3-object/main.go
+  id: check-s3-object
 - binary: bin/check-s3-tag
   main: ./plugins/s3/check-s3-tag/main.go
+  id: check-s3-tag
 - binary: bin/metrics-s3
   main: ./plugins/s3/metrics-s3/main.go
+  id: metrics-s3
 - binary: bin/check-rds
   main: ./plugins/rds/check-rds/main.go
+  id: check-rds
 - binary: bin/check-rds-events
   main: ./plugins/rds/check-rds-events/main.go
+  id: check-rds-events
 - binary: bin/check-rds-pending
   main: ./plugins/rds/check-rds-pending/main.go
+  id: check-rds-pending
 - binary: bin/metrics-rds
   main: ./plugins/rds/metrics-rds/main.go
+  id: metrics-rds
 - binary: bin/check-elb-certs
   main: ./plugins/elb/check-elb-certs/main.go
+  id: check-elb-certs
 - binary: bin/check-elb-health-fog
   main: ./plugins/elb/check-elb-health-fog/main.go
+  id: check-elb-health-fog
 - binary: bin/check-elb-health-sdk
   main: ./plugins/elb/check-elb-health-sdk/main.go
+  id: check-elb-health-sdk
 - binary: bin/check-elb-instances-inservice
   main: ./plugins/elb/check-elb-instances-inservice/main.go
+  id: check-elb-instances-inservice
 - binary: bin/check-elb-latency
   main: ./plugins/elb/check-elb-latency/main.go
+  id: check-elb-latency
 - binary: bin/check-elb-nodes
   main: ./plugins/elb/check-elb-nodes/main.go
+  id: check-elb-nodes
 - binary: bin/check-elb-sum-requests
   main: ./plugins/elb/check-elb-sum-requests/main.go
+  id: check-elb-sum-requests
 - binary: bin/metrics-elb
   main: ./plugins/elb/metrics-elb/main.go
+  id: metrics-elb
 - binary: bin/check-ec2-cpu_balance
   main: ./plugins/ec2/check-ec2-cpu_balance/main.go
+  id: check-ec2-cpu_balance
 - binary: bin/check-ec2-filter
   main: ./plugins/ec2/check-ec2-filter/main.go
+  id: check-ec2-filter
 - binary: bin/check-ec2-netwrok
   main: ./plugins/ec2/check-ec2-network/main.go
+  id: check-ec2-netwrok
 - binary: bin/metrics-ec2-count
   main: ./plugins/ec2/metrics-ec2-count/main.go
+  id: metrics-ec2-count
 - binary: bin/metrics-ec2-filter
   main: ./plugins/ec2/metrics-ec2-filter/main.go
+  id: metrics-ec2-filter
 - binary: bin/check-ebs-burst-limit
   main: ./plugins/ebs/check-ebs-burst-limit/main.go
+  id: check-ebs-burst-limit
 - binary: bin/check-ebs-snapshots
   main: ./plugins/ebs/check-ebs-snapshots/main.go
+  id: check-ebs-snapshots
 - binary: bin/check-cloudwatch-alarms
   main: ./plugins/cloudwatch/check-cloudwatch-alarms/main.go
+  id: check-cloudwatch-alarms
 - binary: bin/check-cloudwatch-composite-metric
   main: ./plugins/cloudwatch/check-cloudwatch-composite-metric/main.go
+  id: check-cloudwatch-composite-metric
 - binary: bin/check-alb-target-group-health
   main: ./plugins/alb/check-alb-target-group-health/main.go
+  id: check-alb-target-group-health
 
   goos:
     - darwin
