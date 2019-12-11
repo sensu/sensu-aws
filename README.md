@@ -317,7 +317,7 @@ $ vi config - copy and paste the above sample config and change the region to so
 
 ## Installation from source
 
-The preferred way of installing and deploying this plugin is to use it as an [asset][2]. If you would like to compile and install the plugin from source or contribute to it, download the latest version of the sensu-CHANGEME from [releases][1]
+The preferred way to install and deploy this plugin is to use it as an [asset][2]. To compile and install the plugin from source or contribute to the plugin, download the latest version of the sensu-CHANGEME from [releases][1] or create an executable script from this source.
 or create an executable script from this source.
 
 From the local path of the sensu-CHANGEME repository:
