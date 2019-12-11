@@ -319,10 +319,10 @@ $ vi config - copy and paste the above sample config and change the region to so
 
 The preferred way to install and deploy this plugin is to use it as an [asset][2]. To compile and install the plugin from source or contribute to the plugin, download the latest version of the sensu-CHANGEME from [releases][1] or create an executable script from this source.
 
-From the local path of the sensu-CHANGEME repository:
+From the local path of the sensu-aws repository:
 
 ```
-go build -o /usr/local/bin/sensu-CHANGEME main.go
+go build -o /usr/local/bin/sensu-aws main.go
 ```
 ## Contributing
 For more information about contributing to this plugin, see https://github.com/sensu/sensu-go/blob/master/CONTRIBUTING.md
