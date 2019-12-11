@@ -263,7 +263,35 @@ If you're using an earlier version of Sensu, you can download the asset definiti
 
 ### Check definition
 
-
+```yaml
+---
+type: CheckConfig
+api_version: core/v2
+metadata:
+  name: check-ec2-network
+  namespace: default
+spec:
+  check_hooks: null
+  command: check-ec2-network -instance_id i-1234567890
+  env_vars: null
+  handlers: []
+  high_flap_threshold: 0
+  interval: 10
+  low_flap_threshold: 0
+  output_metric_format: ""
+  output_metric_handlers: null
+  proxy_entity_name: ""
+  publish: true
+  round_robin: false
+  runtime_assets:
+  - sensu/sensu-aws
+  stdin: false
+  subdue: null
+  subscriptions:
+  - aws
+  timeout: 0
+  ttl: 0
+```
 
 ### On-disk configuration
 
