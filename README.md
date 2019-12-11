@@ -9,7 +9,8 @@
   - [Asset registration](#asset-registration)
   - [Check definition](#check-manifest)
   - [On-disk configuration](#on-disk-configuration)
-- [Installation from source and contributing](#installation-from-source-and-contributing)
+- [Installation from source](#installation-from-source)
+- [Contributing](#contributing)
 
 ## Overview
 
