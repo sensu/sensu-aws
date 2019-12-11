@@ -89,10 +89,7 @@ builds:
 
   goos:
     - darwin
-    - freebsd
     - linux
-    - netbsd
-    - solaris
     - windows
   goarch:
     - amd64
@@ -100,13 +97,11 @@ builds:
     - arm
     - arm64
   goarm:
-    - 5
-    - 6
     - 7
   ignore:
-      # TODO: add freebsd/arm support to gopsutil
-    - goos: freebsd
-      goarch: arm
+    - goos: windows
+      goarch: 386
+    - goos: 
 
 checksum:
   # You can change the name of the checksums file.
