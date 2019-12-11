@@ -296,7 +296,7 @@ spec:
 
 ### On-disk configuration
 
-This plugin requires an on-disk configuration for any host that will be running checks from this collection. See the example below for instructions on creating the file required to operate this plugin.
+This plugin requires on-disk configuration for any host that will run checks from this collection. See the Sample Credential Configuration below to create the file you need to operate this plugin.
 
 ```
 Sample Credential Configuration:
