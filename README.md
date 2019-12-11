@@ -13,7 +13,7 @@
 
 ## Overview
 
-This is a Sensu Go plugin collection that provides a number of metric and status checks for monitoring AWS services with Sensu. 
+This Sensu Go plugin collection provides metric and status checks for monitoring AWS services with Sensu. 
 
 ## Usage examples
 
