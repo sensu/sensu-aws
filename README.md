@@ -1,100 +1,21 @@
-# aws-plugins
 
-TravisCI: [![Build Status](https://travis-ci.org/sensu/sensu-aws.svg?branch=master)](https://travis-ci.org/sensu/sensu-aws)
+[![Bonsai Asset Badge](https://img.shields.io/badge/Sensu%20AWS-Download%20Me-brightgreen.svg?colorB=89C967&logo=sensu)](https://bonsai.sensu.io/assets/sensu/sensu-aws) TravisCI: [![Build Status](https://travis-ci.org/sensu/sensu-aws.svg?branch=master)](https://travis-ci.org/sensu/sensu-aws)
 
-## Functionality
-- check-alb-target-group-health
-- check-cloudwatch-alarm
-- check-cloudwatch-alarms
-- check-cloudwatch-composite-metric
-- check-ebs-burst-limit
-- check-ebs-snapshots
-- check-ec2-cpu_balance
-- check-ec2-filter
-- check-ec2-network
-- metrics-ec2-count
-- metrics-ec2-filter
-- check-elb-certs
-- check-elb-health-fog
-- check-elb-health-sdk
-- check-elb-instance-inservice
-- check-elb-latency
-- check-elb-nodes
-- check-elb-sum-requests
-- elb-metrics
-- check-rds
-- check-rds-events
-- check-rds-pending
-- rds-metrics
-- check-s3-bucket
-- check-s3-bucket-visibility
-- check-s3-object
-- check-s3-tag
-- s3-metrics
+# Sensu Go AWS Plugin Collection
 
-## Files
+- [Overview](#overview)
+- [Usage examples](#usage-examples)
+- [Configuration](#configuration)
+  - [Asset registration](#asset-registration)
+  - [Check definition](#check-manifest)
+  - [On-disk configuration](#on-disk-configuration)
+- [Installation from source and contributing](#installation-from-source-and-contributing)
 
-* /plugins/alb/check-alb-target-group-health/main.go
-* /plugins/cloudwatch/check-cloudwatch-alarm/main.go
-* /plugins/cloudwatch/check-cloudwatch-alarms/main.go
-* /plugins/cloudwatch/check-cloudwatch-composite-metric/main.go
-* /plugins/ebs/check-ebs-burst-limit/main.go
-* /plugins/ebs/check-ebs-snapshots/main.go
-* /plugins/ec2/check-ec2-cpu_balance/main.go
-* /plugins/ec2/check-ec2-filter/main.go
-* /plugins/ec2/check-ec2-network/main.go
-* /plugins/ec2/metrics-ec2-count/main.go
-* /plugins/ec2/metrics-ec2-filter/main.go
-* /plugins/elb/check-elb-certs/main.go
-* /plugins/elb/check-elb-health-fog/main.go
-* /plugins/elb/check-elb-health-sdk/main.go
-* /plugins/elb/check-elb-instances-inservice/main.go
-* /plugins/elb/check-elb-latency/main.go
-* /plugins/elb/check-elb-nodes/main.go
-* /plugins/elb/check-elb-sum-requests/main.go
-* /plugins/elb/metrics-elb/main.go
-* /plugins/rds/check-rds/main.go
-* /plugins/rds/check-rds-events/main.go
-* /plugins/rds/check-rds-pending/main.go
-* /plugins/rds/metrics-rds/main.go
-* /plugins/s3/check-s3-bucket/main.go
-* /plugins/s3/check-s3-bucket-visibility/main.go
-* /plugins/s3/check-s3-object/main.go
-* /plugins/s3/check-s3-tag/main.go
-* plugins/s3/metrics-s3/main.go
+## Overview
 
-## Binaries
+This is a Sensu Go plugin collection that provides a number of metric and status checks for monitoring AWS services with Sensu. 
 
-* /bin/check-alb-target-group-health
-* /bin/check-cloudwatch-alarm
-* /bin/check-cloudwatch-alarms
-* /bin/check-cloudwatch-composite-metric
-* /bin/check-ebs-burst-limit
-* /bin/check-ebs-snapshots
-* /bin/check-ec2-cpu_balance
-* /bin/check-ec2-filter
-* /bin/check-ec2-network
-* /bin/metrics-ec2-count
-* /bin/metrics-ec2-filter
-* /bin/check-elb-certs
-* /bin/check-elb-health-fog
-* /bin/check-elb-health-sdk
-* /bin/check-elb-instances-inservice
-* /bin/check-elb-latency
-* /bin/check-elb-nodes
-* /bin/check-elb-sum-requests
-* /bin/metrics-elb
-* /bin/check-rds
-* /bin/check-rds-events
-* /bin/check-rds-pending
-* /bin/metrics-rds
-* /bin/check-s3-bucket
-* /bin/check-s3-bucket-visibility
-* /bin/check-s3-object
-* /bin/check-s3-tag
-* /bin/metrics-s3
-
-## Usage
+## Usage examples
 
 **check-alb-target-group-health**
 
@@ -329,8 +250,22 @@ TravisCI: [![Build Status](https://travis-ci.org/sensu/sensu-aws.svg?branch=mast
   ./metrics-s3
   
  ```
-   
-## AWS Configuration
+
+## Configuration
+
+### Asset registration
+
+Assets are the best way to make use of this handler. If you're not using an asset, please consider doing so! If you're using Sensu 5.13 or later, you can use the following command to add the asset: 
+
+`sensuctl asset add sensu/sensu-aws`
+
+If you're using an earlier version of Sensu, you can download the asset definition from [this project's Bonsai Asset Index page](https://bonsai.sensu.io/assets/sensu/sensu-aws).
+
+### Check definition
+
+
+
+### On-disk configuration
 
 ```
 Sample Credential Configuration:
@@ -347,13 +282,20 @@ $ mkdir ~/.aws
 $ cd ~/.aws
 $ vi credentials - copy and paste the above sample credential and change the aws_access_key_id and aws_secret_access_key to some valid values. Save the file.
 $ vi config - copy and paste the above sample config and change the region to some valid value. Save the file.
-
 ```
 
-## Example
+## Installation from source and contributing
+
+The preferred way of installing and deploying this plugin is to use it as an [asset][2]. If you would like to compile and install the plugin from source or contribute to it, download the latest version of the sensu-CHANGEME from [releases][1]
+or create an executable script from this source.
+
+From the local path of the sensu-CHANGEME repository:
 
 ```
-Command : ./check-ec2-filter -filters="{\"filters\" : [{\"name\" : \"instance-state-name\", \"values\": [\"running\"]}]}"
-Output : Critical threshold for filter ,  Current Count : 1  
-
+go build -o /usr/local/bin/sensu-CHANGEME main.go
 ```
+
+For more information about contributing to this plugin, see https://github.com/sensu/sensu-go/blob/master/CONTRIBUTING.md
+
+[1]: https://github.com/sensu/sensu-aws/releases
+[2]: #asset-registration
