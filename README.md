@@ -324,7 +324,7 @@ From the local path of the sensu-CHANGEME repository:
 ```
 go build -o /usr/local/bin/sensu-CHANGEME main.go
 ```
-
+## Contributing
 For more information about contributing to this plugin, see https://github.com/sensu/sensu-go/blob/master/CONTRIBUTING.md
 
 [1]: https://github.com/sensu/sensu-aws/releases
