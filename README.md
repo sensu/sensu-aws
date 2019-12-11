@@ -5,6 +5,7 @@
 
 - [Overview](#overview)
 - [Usage examples](#usage-examples)
+  - [Golang program locations](#golang-program-locations)
 - [Configuration](#configuration)
   - [Asset registration](#asset-registration)
   - [Check definition](#check-manifest)
@@ -251,6 +252,10 @@ This Sensu Go plugin collection provides metric and status checks for monitoring
   ./metrics-s3
   
  ```
+ 
+ ### Golang program locations
+ 
+ You can find the individual Golang programs in https://github.com/sensu/sensu-aws/tree/master/plugins. In that directory you'll find a listing of AWS services, with each service directory housing its respective checks.  
 
 ## Configuration
 
