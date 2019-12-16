@@ -62,9 +62,9 @@ builds:
 - binary: bin/check-ec2-filter
   main: ./plugins/ec2/check-ec2-filter/main.go
   id: check-ec2-filter
-- binary: bin/check-ec2-netwrok
+- binary: bin/check-ec2-network
   main: ./plugins/ec2/check-ec2-network/main.go
-  id: check-ec2-netwrok
+  id: check-ec2-network
 - binary: bin/metrics-ec2-count
   main: ./plugins/ec2/metrics-ec2-count/main.go
   id: metrics-ec2-count
