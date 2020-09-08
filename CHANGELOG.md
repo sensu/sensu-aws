@@ -7,6 +7,13 @@ Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## Unreleased
 
+## [0.0.6] - 2020-09-08
+
+### Changed 
+- Updated goreleaser targets
+- Fixed rds start time using fetch age for calculating duration
+- Clean up check-alb-target-group-health
+
 ## [0.0.3] - 2019-12-05
 
 ### Changed 
