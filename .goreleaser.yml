@@ -98,9 +98,14 @@ builds:
     - arm64
   goarm:
     - 7
-  ignore:
-    - goos: windows
-      goarch: 386
+  targets:
+    - darwin_amd64
+    - linux_386
+    - linux_amd64
+    - linux_arm_7
+    - linux_arm64
+    - windows_amd64
+
 
 checksum:
   # You can change the name of the checksums file.
