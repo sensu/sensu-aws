@@ -108,17 +108,10 @@ checksum:
   # Default is `{{ .ProjectName }}_{{ .Version }}_checksums.txt`.
   name_template: "{{ .ProjectName }}_{{ .Version }}_sha256-checksums.txt"
 
-archive:
-  format: tar.gz
-  files:
-    - LICENSE
-    - README.md
-    - CHANGELOG.md
-  # You can change the name of the GitHub release.
-  # This is parsed with the Go template engine and the following variables
-  # are available:
-  # - ProjectName
-  # - Tag
-  # - Version (Git tag without `v` prefix)
-  # Default is ``
-  #name_template: "{{.ProjectName}}-v{{.Version}}"
+archives:
+  - id: tar
+    format: tar.gz
+    files:
+      - LICENSE
+      - README.md
+      - CHANGELOG.md
