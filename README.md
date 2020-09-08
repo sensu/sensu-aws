@@ -1,5 +1,5 @@
 
-[![Bonsai Asset Badge](https://img.shields.io/badge/Sensu%20AWS-Download%20Me-brightgreen.svg?colorB=89C967&logo=sensu)](https://bonsai.sensu.io/assets/sensu/sensu-aws) TravisCI: [![Build Status](https://travis-ci.org/sensu/sensu-aws.svg?branch=master)](https://travis-ci.org/sensu/sensu-aws)
+[![Bonsai Asset Badge](https://img.shields.io/badge/Sensu%20AWS-Download%20Me-brightgreen.svg?colorB=89C967&logo=sensu)](https://bonsai.sensu.io/assets/sensu/sensu-aws)
 
 # Sensu Go AWS Plugin Collection
 
