@@ -58,8 +58,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/spf13/cobra"
 	"github.com/sensu/sensu-aws/awsclient"
+	"github.com/spf13/cobra"
 
 	"github.com/aws/aws-sdk-go/aws"
 
@@ -173,7 +173,7 @@ func getCloudWatchMetrics(metricname string, rdsName string, unit string) (*floa
 	dimensionFilter.Value = aws.String(rdsName)
 	input.Dimensions = []*cloudwatch.Dimension{&dimensionFilter}
 	input.EndTime = aws.Time(time.Now())
-	input.StartTime = aws.Time((input.EndTime).Add(time.Duration(-period/60) * time.Minute))
+	input.StartTime = aws.Time((input.EndTime).Add(time.Duration(-fetchAge/60) * time.Minute))
 	input.Period = aws.Int64(period)
 	input.Statistics = []*string{aws.String(strings.Title(statistic))}
 	input.Unit = aws.String(unit)
