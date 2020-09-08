@@ -7,6 +7,11 @@ Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## Unreleased
 
+## [0.0.0] - 2020-09-08
+
+### Changed
+- Sync up gorelaser and bonsai releases
+
 ## [0.0.8] - 2020-09-08
 
 ### Changed
