@@ -1,100 +1,76 @@
 package main
 
 import (
+	"errors"
 	"fmt"
-	"os"
-	"strings"
-
-	"github.com/aws/aws-sdk-go/aws/awserr"
-	"github.com/spf13/cobra"
+	"log"
 
 	"github.com/aws/aws-sdk-go/aws"
-
-	"github.com/aws/aws-sdk-go/service/elbv2"
-
-	"github.com/sensu/sensu-aws/awsclient"
-
-	"github.com/sensu/sensu-aws/aws_session"
-
 	"github.com/aws/aws-sdk-go/aws/session"
+	"github.com/aws/aws-sdk-go/service/elbv2"
+	"github.com/sensu-community/sensu-plugin-sdk/sensu"
+	corev2 "github.com/sensu/sensu-go/api/core/v2"
 )
-
-/*
-#
-# check-alb-target-group-health
-#
-# DESCRIPTION:
-#   This plugin checks the health of Application Load Balancer target groups
-#
-# OUTPUT:
-#   plain-text
-#
-# PLATFORMS:
-#   MAC OS
-#
-# USAGE:
-#   Check all target groups in a region
-#   ./check-alb-target-group-health --aws_region=us-east-1
-#
-#   Check a single target group in a region
-#   ./check-alb-target-group-health --aws_region=us-east-1 --target_groups=target-group-1
-#
-#   Check multiple target groups in a region
-#   ./check-alb-target-group-health --aws_region=us-east-1 --target_groups=target-group-a,target-group-b
-#
-# LICENSE:
-#   TODO
-*/
 
 var (
-	targetGroups string
+	targetGroups []string
 	awsRegion    string
 	critical     bool
-	elbV2lient   *elbv2.ELBV2
 	awsSession   *session.Session
+
+	config = &sensu.PluginConfig{
+		Name:     "check-alb-target-group-health",
+		Short:    "The Sensu Go Aws ALB check for health management",
+		Timeout:  10,
+		Keyspace: "sensu.io/plugins/sensu-aws/check-alb-target-group-health",
+	}
+
+	options = []*sensu.PluginConfigOption{
+		{
+			Path:     "target-groups",
+			Env:      "TARGET_GROUPS",
+			Argument: "target-groups",
+			Usage:    "The ALB target group(s) to check",
+			Value:    &targetGroups,
+		},
+		{
+			Path:     "aws-region",
+			Env:      "AWS_REGION",
+			Argument: "aws-region",
+			Usage:    "AWS Region",
+			Default:  "us-east-1",
+			Value:    &awsRegion,
+		},
+		{
+			Path:     "critical",
+			Env:      "CRITICAL",
+			Argument: "critical",
+			Default:  false,
+			Usage:    "Critical instead of warn when unhealthy targets are found",
+			Value:    &critical,
+		},
+	}
 )
 
-func checkHealth() {
-	var success bool
-	awsSession = aws_session.CreateAwsSessionWithRegion(awsRegion)
-	success, elbV2lient = awsclient.GetElbV2Client(awsSession)
-	if !success {
-		return
-	}
-	targetGroups, err := getTargerGroups()
-	if err != nil || targetGroups == nil {
-		return
-	}
-	getUnhealthyTargetGroupCount(targetGroups)
+// ELBClient represents the external dependencies of checkHealth()
+type ELBClient interface {
+	DescribeTargetGroups(*elbv2.DescribeTargetGroupsInput) (*elbv2.DescribeTargetGroupsOutput, error)
+	DescribeTargetHealth(*elbv2.DescribeTargetHealthInput) (*elbv2.DescribeTargetHealthOutput, error)
 }
 
-func getTargerGroups() ([]*elbv2.TargetGroup, error) {
-	targets := strings.Split(targetGroups, ",")
-	input := &elbv2.DescribeTargetGroupsInput{}
-	if targets != nil && len(targets) > 0 {
-		input.Names = aws.StringSlice(targets)
-	}
-	output, err := elbV2lient.DescribeTargetGroups(input)
+func checkHealth(client ELBClient, targets []string, critical bool) (int, error) {
+	targetGroups, err := getTargetGroups(client, targets)
 	if err != nil {
-		fmt.Println("Error while calling DescribeTargetGroups AWS API,", err.(awserr.Error).Message())
-		return nil, err
+		return 2, err
 	}
-	if !(output != nil && output.TargetGroups != nil && len(output.TargetGroups) > 0) {
-		return nil, nil
-	}
-	return output.TargetGroups, nil
-}
-
-func getUnhealthyTargetGroupCount(targetGroups []*elbv2.TargetGroup) {
 	unhealthyTargetGroups := make(map[string]int)
 	unhealthyTargets := make(map[string][]string)
 	for _, targetGroup := range targetGroups {
 		healthInput := &elbv2.DescribeTargetHealthInput{}
 		healthInput.TargetGroupArn = targetGroup.TargetGroupArn
-		healthOutput, err := elbV2lient.DescribeTargetHealth(healthInput)
+		healthOutput, err := client.DescribeTargetHealth(healthInput)
 		if err != nil {
-			fmt.Println("Error while calling DescribeTargetHealth AWS API,", err.(awserr.Error).Message())
-			return
+			return 2, err
 		}
 		if !(healthOutput != nil && healthOutput.TargetHealthDescriptions != nil && len(healthOutput.TargetHealthDescriptions) > 0) {
 			continue
@@ -107,46 +83,44 @@ func getUnhealthyTargetGroupCount(targetGroups []*elbv2.TargetGroup) {
 		}
 	}
 	if len(unhealthyTargetGroups) <= 0 {
-		fmt.Println("OK : All ALB target groups are healthy")
-		return
+		return 0, nil
 	}
+	status := 1
 	if critical {
-		fmt.Println("CRITICAL:")
-	} else {
-		fmt.Println("WARNING:")
+		status = 2
 	}
 	for targetGroup, count := range unhealthyTargetGroups {
-		fmt.Println(fmt.Sprintf("Target Group Name : '%s' having %d unhealthy targets - %v", targetGroup, count, unhealthyTargets[targetGroup]))
+		log.Println(fmt.Sprintf("Target group '%s' has %d unhealthy members - %v", targetGroup, count, unhealthyTargets[targetGroup]))
 	}
+	return status, errors.New("one or more target groups is unhealthy")
+}
+
+func getTargetGroups(client ELBClient, targetGroups []string) ([]*elbv2.TargetGroup, error) {
+	if len(targetGroups) == 0 {
+		return nil, errors.New("no target groups specified")
+	}
+	input := &elbv2.DescribeTargetGroupsInput{
+		Names: aws.StringSlice(targetGroups),
+	}
+	output, err := client.DescribeTargetGroups(input)
+	if err != nil {
+		return nil, err
+	}
+	return output.TargetGroups, nil
 }
 
 func main() {
-	rootCmd := configureRootCommand()
-	if err := rootCmd.Execute(); err != nil {
-		fmt.Fprintf(os.Stderr, "error: %v\n", err)
-		os.Exit(1)
+	validator := func(*corev2.Event) (int, error) {
+		return 0, nil
 	}
-}
-
-func run(cmd *cobra.Command, args []string) error {
-	if len(args) != 0 {
-		_ = cmd.Help()
-		return fmt.Errorf("invalid argument(s) received")
+	executor := func(*corev2.Event) (int, error) {
+		session, err := session.NewSession(&aws.Config{
+			Region: &awsRegion,
+		})
+		if err != nil {
+			return 2, err
+		}
+		return checkHealth(elbv2.New(session), targetGroups, critical)
 	}
-	checkHealth()
-	return nil
-}
-
-func configureRootCommand() *cobra.Command {
-	cmd := &cobra.Command{
-		Use:   "check-alb-target-group-health",
-		Short: "The Sensu Go Aws ALB handler for health management",
-		RunE:  run,
-	}
-
-	cmd.Flags().StringVar(&targetGroups, "target_groups", "", "The ALB target group(s) to check. Separate multiple target groups with commas")
-	cmd.Flags().StringVar(&awsRegion, "aws_region", "us-east-1", "AWS Region (defaults to us-east-1).")
-	cmd.Flags().BoolVar(&critical, "critical", false, "Critical instead of warn when unhealthy targets are found")
-
-	return cmd
+	sensu.NewGoCheck(config, options, validator, executor, false).Execute()
 }
