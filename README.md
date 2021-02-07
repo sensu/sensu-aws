@@ -34,7 +34,7 @@ This Sensu Go plugin collection provides metric and status checks for monitoring
 ```
   ./check-cloudwatch-alarm --aws_region=eu-west-1
    
-  ./check-cloudwatch-alarm --state=ALEARM
+  ./check-cloudwatch-alarm --state=ALARM
 
 ```
 **check-cloudwatch-alarms**
@@ -44,7 +44,7 @@ This Sensu Go plugin collection provides metric and status checks for monitoring
   
   ./check-cloudwatch-alarms --aws_region=eu-west-1 --exclude_alarms=CPUAlarmLow
   
-  ./check-cloudwatch-alarms --state=ALEARM
+  ./check-cloudwatch-alarms --state=ALARM
       
 ```
 **check-cloudwatch-composite-metric**
