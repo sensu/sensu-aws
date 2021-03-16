@@ -100,8 +100,8 @@ func getCloudWatchMetrics(metricname string, statistic string, rdsName string) (
 	dimensionFilter.Name = aws.String("DBInstanceIdentifier")
 	dimensionFilter.Value = aws.String(rdsName)
 	input.Dimensions = []*cloudwatch.Dimension{&dimensionFilter}
-	input.EndTime = aws.Time(time.Now().Add(time.Duration(-fetchAge/60) * time.Minute))
-	input.StartTime = aws.Time((*input.EndTime).Add(time.Duration(-period/60) * time.Minute))
+	input.EndTime = aws.Time(time.Now())
+  	input.StartTime = aws.Time((input.EndTime).Add(time.Duration(-fetchAge/60) * time.Minute))
 	input.Period = aws.Int64(period)
 	input.Statistics = []*string{aws.String(statistic)}
 	metrics, err := cloudWatchClient.GetMetricStatistics(&input)
@@ -134,6 +134,7 @@ func getCloudWatchMetrics(metricname string, statistic string, rdsName string) (
 func getStatisticTypes() map[string]string {
 	statisticType := "Average"
 	statisticsTypeMap := make(map[string]string)
+	statisticsTypeMap["BurstBalance"] = statisticType
 	statisticsTypeMap["CPUUtilization"] = statisticType
 	statisticsTypeMap["DatabaseConnections"] = statisticType
 	statisticsTypeMap["FreeStorageSpace"] = statisticType
@@ -208,8 +209,8 @@ func configureRootCommand() *cobra.Command {
 		"",
 		"Metric naming scheme, text to prepend to metric")
 
-	cmd.Flags().StringVar(&awsRegion, "aws_region", "us-east-1", "AWS Region (defaults to us-east-1).")
-	cmd.Flags().StringVar(&scheme, "scheme", "", "Metric naming scheme, text to prepend to metric")
+//	cmd.Flags().StringVar(&awsRegion, "aws_region", "us-east-1", "AWS Region (defaults to us-east-1).")
+//	cmd.Flags().StringVar(&scheme, "scheme", "", "Metric naming scheme, text to prepend to metric")
 	cmd.Flags().StringVar(&dbInstanceId, "db_instance_id", "", "DB instance identifier")
 	cmd.Flags().IntVar(&fetchAge, "fetch_age", 0, "How long ago to fetch metrics from in seconds")
 	cmd.Flags().Int64Var(&period, "period", 60, "CloudWatch metric statistics period")
